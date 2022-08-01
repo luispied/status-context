@@ -7,6 +7,7 @@ export const Main = memo(() => {
   const { cacheData, getStatus, setStatus } = useContext(StatusContext);
   const [key, setKey] = useState("key");
   const [value, setValue] = useState("value");
+  const [showPickers, setShowPickers] = useState(true);
 
   const handleStatusChange = () => {
     setStatus(key, value);
@@ -32,15 +33,18 @@ export const Main = memo(() => {
         Current value of '{key}': {getStatus(key) || "undefined"}
       </div>
 
-      <>
-        <Status value="Task/1" />
-        <Status value="Shot/2" />
-        <Status value="Version/2" />
-        <Status value="Version/1" />
-        <Status value="Version/3" />
-        <Status value="Version/1" />
-        <Status value="Task/1" />
-      </>
+      {showPickers && (
+        <>
+          <Status value="Task/1" />
+          <Status value="Shot/2" />
+          <Status value="Version/2" />
+          <Status value="Version/1" />
+          <Status value="Version/3" />
+          <Status value="Version/1" />
+          <Status value="Task/1" />
+        </>
+      )}
+      <button onClick={() => setShowPickers(!showPickers)}>Toggle</button>
     </div>
   );
 });

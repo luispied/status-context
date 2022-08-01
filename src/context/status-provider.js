@@ -16,8 +16,6 @@ export const StatusProvider = ({ children }) => {
 
   const setCache = useCallback((key, data) => {
     try {
-      // console.log(cacheData);
-
       console.log("Setting value to cache with key " + key, data);
 
       setCacheData((current) => {
@@ -52,7 +50,7 @@ export const StatusProvider = ({ children }) => {
       cacheData: dataRef,
       getStatus: getCache,
       setStatus: setCache,
-      register
+      register,
     };
   }, [getCache, setCache, dataRef, register]);
 

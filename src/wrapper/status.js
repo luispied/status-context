@@ -1,16 +1,11 @@
 import { StatusPicker as Presentation } from "../components/status-picker";
 import { useContext, useEffect, useState } from "react";
 import { StatusContext } from "../context/status-context";
+import { useStatus } from "../hooks/use-status";
 
 export const Consumer = ({ value }) => {
-  const { cacheData, getStatus, register } = useContext(StatusContext);
-  const [updatedStatus, setUpdatedStatus] = useState();
-  // const { status } = getStatus({ value });
-  useEffect(() => {
-    const status = getStatus(value);
-    setUpdatedStatus(status);
-    console.log("updated status " + status);
-  }, [cacheData, getStatus, value]);
+  const { getLastStatus } = useStatus({ value });
+  const { register } = useContext(StatusContext);
 
   useEffect(() => {
     const unregister = register(value);
@@ -20,5 +15,5 @@ export const Consumer = ({ value }) => {
     };
   }, [register, value]);
 
-  return <Presentation value={value} status={updatedStatus} />;
+  return <Presentation value={value} status={getLastStatus()} />;
 };
